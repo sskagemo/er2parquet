@@ -52,3 +52,7 @@ MANIFEST
 .venv*/
 .conda*/
 .python-version
+
+# My configurations
+src/er2parquet/explore.py
+src/er2parquet/skeleton.py
