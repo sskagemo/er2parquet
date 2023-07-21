@@ -16,7 +16,8 @@
 
 > A tool to transform the register-data for all legal entities in Norway from a JSON-format to a parquet-format, which can be read faster, with less memory consumption and with more useful datatypes.
 
-_Important! This is NOT an officially supported distribution - it is purely a private initiative primarily to solve my own needs :-)_
+_Important! This is NOT an officially product from the Brønnøysund Register Centre - it is purely a private initiative primarily to solve my own needs :-) The official distributions
+are available from [data.brreg.no](https://data.brreg.no)._
 
 ## A more efficient copy of the Register for Legal Entities
 The Brønnøysund Register Centre (Brønnøysundregistrene) publishes the data from  the Central Coordinating Register for Legal Entities (CCR), a register which also includes data from the Norwegian Register of Business Enterprises, as Open Data. The data can be accessed via an API, for individual records or queries, returning at most 10.000 records. But it is also possible to download the full dataset either as a JSON-file (zipped) or an Excel-file.
