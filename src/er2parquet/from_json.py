@@ -45,8 +45,8 @@ def json2df(filnavn: str) -> pd.DataFrame:
     # Gjenstående konverteringer
 
     # Konvertere datoer
-    df['stiftelsesdato'] = pd.to_datetime(df['stiftelsesdato'], unit='D', errors='coerce')
-    df['registreringsdatoEnhetsregisteret'] = pd.to_datetime(df['registreringsdatoEnhetsregisteret'], unit='D', errors='coerce')
+    df['stiftelsesdato'] = pd.to_datetime(df['stiftelsesdato'], errors='coerce')
+    df['registreringsdatoEnhetsregisteret'] = pd.to_datetime(df['registreringsdatoEnhetsregisteret'], errors='coerce')
 
     # Konvertere til kategorier
     df = df.astype({k: v for k, v in kolonner.items() if v == 'category'})
