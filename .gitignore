@@ -56,3 +56,5 @@ MANIFEST
 # My configurations
 src/er2parquet/explore.py
 src/er2parquet/skeleton.py
+enheter_alle.json.gz
+enheter_alle.parquet

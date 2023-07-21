@@ -57,17 +57,40 @@ def json2df(filnavn: str) -> pd.DataFrame:
     # Redusere størrelsen på tallformatet for antall ansatte
     df['antallAnsatte'] = pd.to_numeric(df['antallAnsatte'], downcast='integer')
 
+    # Fjerne kolonner som ikke skal med, dvs bare bevare de vi ønsker
+    df = df[list(kolonner.keys())]
 
-    return df[list(kolonner.keys())]
+    # Sette organisasjonsnummer som index
+    df = df.set_index('organisasjonsnummer')
+
+    return df
 
 
 
 if __name__ == '__main__':
     from er2parquet.to_parquet import to_parquet
     from er2parquet.from_parquet import from_parquet
+    import requests
 
-    df = json2df('tests/testdata/enheter_alle.json.gz')
+    # check if the file already exists (only download if necessary)
+    import os.path
+    if os.path.isfile('enheter_alle.json.gz'):
+        print('File already exists, will reuse it.')
+
+    else:
+        print('Downloading file ...')
+        # download the file contents in binary format with requests
+        r = requests.get('https://data.brreg.no/enhetsregisteret/oppslag/enheter/lastned')
+
+        # save the contents to disk
+        with open('enheter_alle.json.gz', 'wb') as f:
+            f.write(r.content)
+
+    print('Converting to DataFrame ...')
+    df = json2df('enheter_alle.json.gz')
     print(df.info())
+    print('Writing to Parquet ...')
     to_parquet(df, 'enheter_alle.parquet')
+    print('Reading from Parquet to verify ...')
     df = from_parquet('enheter_alle.parquet')
     print(df.info())
